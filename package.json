@@ -1,0 +1,14 @@
+{
+  "name": "tadc-neural-simulation",
+  "version": "1.0.0",
+  "private": true,
+  "description": "TADC-inspired MRI neural simulation exhibit",
+  "scripts": {
+    "dev": "vite",
+    "start": "vite",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "vite": "^7.1.5"
+  }
+}
