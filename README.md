@@ -1,8 +1,59 @@
-# TADC Neural Simulation 🧠🎪
+# TADC Neural Circus VR 🧠🎪🥽
 
-A browser-based TADC-inspired neural exhibit using the supplied brain references and an **MRI-derived 3D brain asset**.
+A WebXR-ready TADC-inspired neural laboratory built around the supplied MRI and fruit-fly brain references.
 
-## What is in the project
+## VR mode
+
+The browser build now uses Three.js WebXR and provides an **ENTER VR** button. On a compatible headset/browser, launch immersive VR and inspect the neural lab around you.
+
+Desktop mode remains available for testing with mouse orbit and wheel zoom.
+
+### Current VR features
+
+- WebXR immersive-session button
+- VR-compatible Three.js renderer
+- Human MRI-derived 3D brain
+- Bubble fruit-fly brain mode
+- Neural pulse animation
+- Auto-rotation toggle
+- Reset view
+- VR-friendly neural-lab floor/grid
+- Mode switching between Human MRI and Bubble
+
+## Asset paths
+
+```text
+assets/models/bma_mri_brain.glb
+assets/models/bubble_fruit_fly_brain.glb
+assets/brain-scans/bubble-fruit-fly-brain.jpg
+```
+
+The binary GLBs must be uploaded through Git/LFS or another normal Git client; the repository's connector can write the WebXR source code but cannot transfer local binary files directly. `.gitattributes` is configured for GLB/GZIP/Blend LFS tracking.
+
+## MRI source
+
+The human asset was generated from `bma-1-mri.nii.gz` using physical-spacing-aware preprocessing and marching cubes. It is an anatomical MRI-derived surface, not a neuron-by-neuron connectome or medical diagnostic tool.
+
+## Bubble source
+
+Bubble's browser asset uses the supplied `Fruit_Brain.jpg` as its scan/reference source. A single 2D image cannot establish a true volumetric neuron-by-neuron fruit-fly connectome.
+
+## Run locally
+
+```bash
+python -m http.server 8080
+```
+
+Open `http://localhost:8080/` in a WebXR-capable browser. For immersive VR, use a compatible headset/browser and HTTPS in deployed environments.
+
+## Rebuild the human asset
+
+```bash
+pip install nibabel numpy scipy scikit-image trimesh
+python tools/nifti_to_glb.py bma-1-mri.nii.gz assets/models/bma_mri_brain.glb
+```
+
+## Project structure
 
 ```text
 .
@@ -14,65 +65,17 @@ A browser-based TADC-inspired neural exhibit using the supplied brain references
 │   └── styles.css
 ├── assets/
 │   ├── brain-scans/
-│   │   └── README.md
 │   └── models/
-│       └── README.md
 ├── tools/
-│   └── nifti_to_glb.py
+├── blender/
 ├── add_brains_to_blend.py
 ├── vercel.json
 └── README.md
 ```
 
-## MRI pipeline
-
-The uploaded `bma-1-mri.nii.gz` was converted into `bma_mri_brain.glb`. The generated browser asset is a lightweight anatomical surface produced with physical voxel spacing, connected-component cleanup, physical erosion, marching cubes, and smoothing.
-
-The resulting GLB is approximately 0.55 MB, with about 14k vertices and 29k triangles, making it practical for a browser viewer.
-
-**This is an anatomical MRI-derived surface, not a neuron-by-neuron connectome and not a medical diagnostic tool.**
-
-## Put the binary assets in the repository
-
-The GitHub connection used to build this repository can write UTF-8 source files but cannot directly transfer binary `.glb`, `.nii.gz`, `.blend`, `.jpg`, or `.webp` files through the repository contents API.
-
-For the complete binary project, add:
-
-```text
-assets/models/bma_mri_brain.glb
-assets/brain-scans/human-brain.webp
-assets/brain-scans/bubble-fruit-fly-brain.jpg
-blender/Circus Lobby V10.blend
-```
-
-The generated GLB is available from this ChatGPT conversation as `bma_mri_brain.glb`. The original Blender scene and supplied scan images are also available as the uploaded source files.
-
-For the 59 MB Blender source, Git LFS is recommended.
-
-## Run locally
-
-Because the app uses ES modules, serve the folder through a local HTTP server rather than opening `index.html` with `file://`.
-
-```bash
-python -m http.server 8080
-```
-
-Then open `http://localhost:8080/`.
-
-## Rebuild the brain asset
-
-```bash
-pip install nibabel numpy scipy scikit-image trimesh
-python tools/nifti_to_glb.py bma-1-mri.nii.gz assets/models/bma_mri_brain.glb
-```
-
-## Blender integration
-
-Open the supplied `Circus Lobby V10.blend` in Blender and run `add_brains_to_blend.py`. The script can import the generated GLB as the anatomical brain object and create a Bubble neural display placeholder.
-
 ## Vercel
 
-This is a static site: Vercel can serve `index.html`, `src/`, and `assets/` directly. Once the binary GLB is uploaded to `assets/models/`, the 3D viewer will load it automatically.
+The project is a static WebXR site. Serve it over HTTPS for deployed immersive sessions.
 
 ## Credits / rights
 
