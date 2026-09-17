@@ -1,1 +1,60 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TADC Neural Simulation Lab</title><style>*{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden;font:12px Arial;background:#07030f;color:#fff}body{background:radial-gradient(circle at 50% 35%,#3b1870,#100522 45%,#030107)}.top{position:fixed;z-index:5;inset:18px 20px auto;display:flex;justify-content:space-between;font-weight:900;letter-spacing:.12em;text-transform:uppercase}.badge{border:1px solid #a875ff77;border-radius:20px;padding:7px 10px;background:#150a2ddd}.room{position:absolute;inset:8% 5%;display:grid;place-items:center;perspective:900px}.arch{position:absolute;inset:7% 12% 20%;border:9px solid #8b5cff44;border-bottom:0;border-radius:45% 45% 0 0;box-shadow:inset 0 0 45px #9a64ff33}.pods{width:min(92vw,950px);display:flex;gap:35px;justify-content:center;transform-style:preserve-3d;transition:.25s}.pod{position:relative;width:min(42vw,410px);aspect-ratio:1.08;border:1px solid #b889ff88;border-radius:28px;background:#120a22cc;box-shadow:0 0 40px #8d50ff33,0 25px 60px #0009;overflow:hidden}.pod:before{content:"";position:absolute;inset:8px;border:1px solid #ffffff16;border-radius:21px;background:repeating-linear-gradient(0deg,transparent 0 8px,#fff1 9px);z-index:3}.brain{position:absolute;inset:7%;display:grid;place-items:center}.brain img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 0 16px #8e5cff);animation:f 4s ease-in-out infinite}.bubble img{filter:drop-shadow(0 0 18px #ff4bd2)}.nodes{position:absolute;inset:0}.n{position:absolute;width:5px;height:5px;border-radius:50%;background:#fff;box-shadow:0 0 10px #c78cff;animation:p 1.5s infinite}.bubble .n{box-shadow:0 0 10px #ff6ddd}.label{position:absolute;z-index:4;left:18px;right:18px;bottom:14px;display:flex;justify-content:space-between;align-items:end}.name{font-size:17px;font-weight:900}.sub{font-size:9px;opacity:.6;text-transform:uppercase;letter-spacing:.1em;margin-top:4px}.state{padding:5px 7px;background:#09050fcc;border:1px solid #fff2;border-radius:6px;color:#9ff}.bubble .state{color:#ff9fe9}.core{position:absolute;bottom:10%;width:20px;height:20px;border-radius:50%;background:white;box-shadow:0 0 20px 8px #9a60ff,0 0 70px 25px #9a60ff55;animation:c 1.4s infinite}.controls{position:fixed;z-index:6;left:20px;bottom:20px;display:flex;gap:8px}.btn{background:#160b2bdd;color:#fff;border:1px solid #9a70ff66;border-radius:9px;padding:9px 12px;font-weight:700}.on{border-color:#d0b9ff;box-shadow:0 0 14px #a66cff44}@keyframes p{50%{opacity:1;transform:scale(1.6)}0%,100%{opacity:.2}}@keyframes f{50%{transform:translateY(-7px) scale(1.02)}}@keyframes c{50%{transform:scale(1.35)}}@media(max-width:720px){.pods{gap:10px}.name{font-size:12px}.sub{font-size:7px}.pod{width:48vw}}</style></head><body><div class="top"><div>Amazing Digital Circus <span style="opacity:.5">/// Neural Lab</span></div><div class="badge" id="status">SIMULATION ONLINE</div></div><div class="room"><div class="arch"></div><div class="pods" id="pods"><section class="pod"><div class="brain"><img src="assets/brain-human.svg" alt="Human neural model"></div><div class="nodes"></div><div class="label"><div><div class="name">Neural Archive A</div><div class="sub">Whole-brain connectivity simulation</div></div><div class="state">ACTIVE</div></div></section><section class="pod bubble"><div class="brain"><img src="assets/brain-bubble.svg" alt="Bubble fruit-fly neural model"></div><div class="nodes"></div><div class="label"><div><div class="name">Bubble</div><div class="sub">Fruit-fly neural mesh simulation</div></div><div class="state">BUBBLE LINK</div></div></section></div><div class="core"></div></div><div class="controls"><button class="btn on" id="pulse">Neural pulses: ON</button><button class="btn" id="spin">Auto-rotate: OFF</button></div><script>const pods=[...document.querySelectorAll('.pod')];for(const pod of pods){const f=pod.querySelector('.nodes');for(let i=0;i<24;i++){const n=document.createElement('i');n.className='n';n.style.left=(7+Math.random()*86)+'%';n.style.top=(8+Math.random()*72)+'%';n.style.animationDelay=(-Math.random()*1.5)+'s';f.appendChild(n)}}let pulse=true,auto=false,a=0;document.querySelector('#pulse').onclick=e=>{pulse=!pulse;e.classList.toggle('on',pulse);e.textContent='Neural pulses: '+(pulse?'ON':'OFF');document.querySelectorAll('.n').forEach(n=>n.style.animationPlayState=pulse?'running':'paused')};document.querySelector('#spin').onclick=e=>{auto=!auto;e.classList.toggle('on',auto);e.textContent='Auto-rotate: '+(auto?'ON':'OFF');document.querySelector('#status').textContent=auto?'AUTO SIMULATION':'SIMULATION ONLINE'};document.querySelector('#pods').onpointermove=e=>{if(auto)return;const x=(e.clientX/innerWidth-.5)*10,y=(e.clientY/innerHeight-.5)*-7;e.currentTarget.style.transform=`rotateY(${x}deg) rotateX(${y}deg)`};function loop(){if(auto){a+=.12;pods[0].parentElement.style.transform=`rotateY(${a}deg)`}requestAnimationFrame(loop)}loop();</script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="TADC-inspired browser neural simulation using an MRI-derived 3D brain asset and a fruit-fly brain model for Bubble.">
+  <title>TADC Neural Simulation</title>
+  <link rel="stylesheet" href="src/styles.css">
+</head>
+<body>
+  <header class="hud">
+    <div>
+      <div class="eyebrow">AMAZING DIGITAL CIRCUS // NEURAL LAB</div>
+      <h1>Neural Simulation</h1>
+      <p>Real MRI-derived anatomy + Bubble's fruit-fly neural representation.</p>
+    </div>
+    <div class="status" id="status">INITIALISING</div>
+  </header>
+
+  <main class="layout">
+    <section class="viewer-card">
+      <canvas id="brainCanvas" aria-label="Interactive 3D MRI-derived brain"></canvas>
+      <div class="viewer-overlay">
+        <span id="assetStatus">Loading MRI-derived GLB…</span>
+        <span>Drag: orbit · Wheel: zoom · Double-click: reset</span>
+      </div>
+    </section>
+
+    <aside class="panel">
+      <div class="tabs">
+        <button class="tab active" data-mode="human">Human MRI</button>
+        <button class="tab" data-mode="bubble">Bubble</button>
+      </div>
+      <div id="humanPanel">
+        <h2>MRI Brain Asset</h2>
+        <p>This viewer loads <code>assets/models/bma_mri_brain.glb</code>, generated from the uploaded NIfTI volume.</p>
+        <dl>
+          <div><dt>Source</dt><dd>bma-1-mri.nii.gz</dd></div>
+          <div><dt>Original grid</dt><dd>678 × 1000 × 210</dd></div>
+          <div><dt>Voxel spacing</dt><dd>≈ 0.04 × 0.04 × 0.112 mm</dd></div>
+          <div><dt>Mesh</dt><dd>≈ 14k vertices / 29k triangles</dd></div>
+        </dl>
+      </div>
+      <div id="bubblePanel" hidden>
+        <h2>Bubble Neural Layer</h2>
+        <p>Bubble uses the supplied fruit-fly brain scan as the visual source. Add the source image at <code>assets/brain-scans/bubble-fruit-fly-brain.jpg</code>.</p>
+        <p class="note">A fruit-fly scan image is anatomical reference data; it is not automatically a neuron-by-neuron connectome.</p>
+      </div>
+      <div class="controls">
+        <button id="pulse" class="control on">Neural pulses: ON</button>
+        <button id="rotate" class="control">Auto-rotate: OFF</button>
+        <button id="reset" class="control">Reset view</button>
+      </div>
+    </aside>
+  </main>
+
+  <footer>Experimental fan project · TADC-inspired presentation · MRI asset is an anatomical visualization, not a medical diagnostic tool.</footer>
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>
