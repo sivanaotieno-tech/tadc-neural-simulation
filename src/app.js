@@ -29,10 +29,11 @@ document.querySelector('#rotate').addEventListener('click', e => {
 
 document.querySelector('#reset').addEventListener('click', () => viewer.reset());
 
-tabs.forEach(tab => tab.addEventListener('click', () => {
+tabs.forEach(tab => tab.addEventListener('click', async () => {
   const mode = tab.dataset.mode;
   tabs.forEach(t => t.classList.toggle('active', t === tab));
   humanPanel.hidden = mode !== 'human';
   bubblePanel.hidden = mode !== 'bubble';
-  status.textContent = mode === 'human' ? 'MRI 3D ASSET ONLINE' : 'BUBBLE NEURAL LINK';
+  status.textContent = mode === 'human' ? 'LOADING HUMAN MRI' : 'LOADING BUBBLE';
+  await viewer.setMode(mode);
 }));
