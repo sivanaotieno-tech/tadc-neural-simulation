@@ -3,26 +3,26 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="TADC-inspired browser neural simulation using an MRI-derived 3D brain asset and a fruit-fly brain model for Bubble.">
-  <title>TADC Neural Simulation</title>
+  <meta name="description" content="TADC-inspired WebXR neural simulation game with an MRI-derived human brain and Bubble fruit-fly brain.">
+  <title>Neural Circus VR</title>
   <link rel="stylesheet" href="src/styles.css">
 </head>
 <body>
   <header class="hud">
     <div>
-      <div class="eyebrow">AMAZING DIGITAL CIRCUS // NEURAL LAB</div>
-      <h1>Neural Simulation</h1>
-      <p>Real MRI-derived anatomy + Bubble's fruit-fly neural representation.</p>
+      <div class="eyebrow">NEURAL CIRCUS // WEBXR</div>
+      <h1>Neural Circus VR</h1>
+      <p>Enter the neural lab, inspect the MRI brain, and switch to Bubble's fruit-fly scan.</p>
     </div>
-    <div class="status" id="status">INITIALISING</div>
+    <div class="status" id="status">INITIALISING VR</div>
   </header>
 
   <main class="layout">
     <section class="viewer-card">
-      <canvas id="brainCanvas" aria-label="Interactive 3D MRI-derived brain"></canvas>
+      <canvas id="brainCanvas" aria-label="WebXR neural laboratory"></canvas>
       <div class="viewer-overlay">
-        <span id="assetStatus">Loading MRI-derived GLB…</span>
-        <span>Drag: orbit · Wheel: zoom · Double-click: reset</span>
+        <span id="assetStatus">Preparing VR lab…</span>
+        <span>Desktop: mouse + wheel · Headset: VR button + controllers</span>
       </div>
     </section>
 
@@ -32,29 +32,30 @@
         <button class="tab" data-mode="bubble">Bubble</button>
       </div>
       <div id="humanPanel">
-        <h2>MRI Brain Asset</h2>
-        <p>This viewer loads <code>assets/models/bma_mri_brain.glb</code>, generated from the uploaded NIfTI volume.</p>
+        <h2>Neural Lab</h2>
+        <p>Explore the MRI-derived brain in an immersive WebXR scene.</p>
         <dl>
+          <div><dt>VR</dt><dd>WebXR enabled</dd></div>
           <div><dt>Source</dt><dd>bma-1-mri.nii.gz</dd></div>
-          <div><dt>Original grid</dt><dd>678 × 1000 × 210</dd></div>
-          <div><dt>Voxel spacing</dt><dd>≈ 0.04 × 0.04 × 0.112 mm</dd></div>
-          <div><dt>Mesh</dt><dd>≈ 14k vertices / 29k triangles</dd></div>
+          <div><dt>Grid</dt><dd>678 × 1000 × 210</dd></div>
+          <div><dt>Voxel</dt><dd>≈ 0.04 × 0.04 × 0.112 mm</dd></div>
         </dl>
       </div>
       <div id="bubblePanel" hidden>
-        <h2>Bubble Neural Layer</h2>
-        <p>Bubble uses the supplied fruit-fly brain scan as the visual source. Add the source image at <code>assets/brain-scans/bubble-fruit-fly-brain.jpg</code>.</p>
-        <p class="note">A fruit-fly scan image is anatomical reference data; it is not automatically a neuron-by-neuron connectome.</p>
+        <h2>Bubble's Neural Lab</h2>
+        <p>Switch to the supplied fruit-fly brain scan and inspect it in the same VR room.</p>
+        <p class="note">The supplied image is a scan/reference visualization, not a neuron-by-neuron connectome.</p>
       </div>
       <div class="controls">
         <button id="pulse" class="control on">Neural pulses: ON</button>
         <button id="rotate" class="control">Auto-rotate: OFF</button>
         <button id="reset" class="control">Reset view</button>
       </div>
+      <div class="vr-help">🥽 <b>VR:</b> press <b>ENTER VR</b>. Use the headset/controllers to look around the neural lab.</div>
     </aside>
   </main>
 
-  <footer>Experimental fan project · TADC-inspired presentation · MRI asset is an anatomical visualization, not a medical diagnostic tool.</footer>
+  <footer>Experimental fan project · WebXR build · Requires a WebXR-compatible browser/headset for immersive mode.</footer>
   <script type="module" src="src/app.js"></script>
 </body>
 </html>
