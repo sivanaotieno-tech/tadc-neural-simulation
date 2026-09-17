@@ -1,20 +1,31 @@
-# TADC Neural Simulation 🧠🎪
+# TADC Neural Simulation Lab 🧠🎪
 
-An interactive TADC-inspired neural simulation for a digital-circus environment.
+A TADC-inspired interactive neural exhibit built around the supplied Circus Lobby environment and brain references.
 
-## Brain models
+## Project structure
 
-- Human brain visualization — neural activity and holographic presentation.
-- Bubble — fruit-fly brain visualization.
+- `index.html` — main interactive web exhibit.
+- `index-github.html` — GitHub-friendly entry page.
+- `assets/brain-human.svg` — web human-neural visualization.
+- `assets/brain-bubble.svg` — Bubble fruit-fly neural visualization.
+- `add_brains_to_blend.py` — Blender automation script for creating emissive hologram planes.
+- `Circus Lobby V10.blend` — original Blender source scene.
+- `assets/brain-human.webp` — supplied human-brain reference.
+- `assets/brain-bubble.jpg` — supplied fruit-fly-brain reference.
+- `vercel.json` — Vercel routing configuration.
 
-## Blender environment
+## Blender setup
 
-The intended 3D environment is **Circus Lobby V10.blend**. The Blender scene is kept separate from the lightweight web demo because GitHub's normal contents API does not support uploading the binary `.blend` through this integration.
+Open `Circus Lobby V10.blend` in Blender with the `assets` folder beside it, then run `add_brains_to_blend.py`. The script creates `Neural Archive A` and `Bubble Fruit-Fly Brain` emissive holograms in front of the active camera.
 
-## Run
+## Web exhibit
 
-Open `index.html` directly in a browser, or deploy the repository as a static site on Vercel.
+Open `index.html` locally or deploy the repository as a static Vercel site. The browser version uses the SVG neural assets so it works without a Blender runtime.
+
+## Binary-source note
+
+The complete source package also contains the original `.blend`, `.webp`, and `.jpg` binary files. This GitHub connection can write UTF-8 repository files, but it cannot transfer the 59 MB Blender binary through the repository contents interface. Those binary source files therefore need to be uploaded through GitHub's normal web/Git client (or Git LFS for the large Blender file). The repository still contains the runnable web/source layer and Blender integration script.
 
 ## Credits
 
-TADC-inspired fan project. The brain imagery/models should be used only where you have the appropriate rights or permission.
+TADC-inspired fan project. Use supplied brain imagery/models only where you have the appropriate rights or permission.
