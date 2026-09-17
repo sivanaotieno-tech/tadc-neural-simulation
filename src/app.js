@@ -1,10 +1,13 @@
 import { BrainViewer } from './brain-viewer.js';
+import { Soundtrack } from './soundtrack.js';
+import { getRibbit } from './ribbit.js';
 
 const status = document.querySelector('#status');
 const assetStatus = document.querySelector('#assetStatus');
 const humanPanel = document.querySelector('#humanPanel');
 const bubblePanel = document.querySelector('#bubblePanel');
 const tabs = [...document.querySelectorAll('.tab')];
+const soundtrack = new Soundtrack();
 const viewer = new BrainViewer(document.querySelector('#brainCanvas'), text => {
   status.textContent = text;
   assetStatus.textContent = text;
@@ -28,6 +31,25 @@ document.querySelector('#rotate').addEventListener('click', e => {
 });
 
 document.querySelector('#reset').addEventListener('click', () => viewer.reset());
+
+document.querySelector('#music').addEventListener('click', async e => {
+  if (soundtrack.audio?.paused) {
+    await soundtrack.play('main');
+    e.textContent = 'Soundtrack: ON';
+    e.classList.add('on');
+  } else {
+    soundtrack.stop();
+    e.textContent = 'Soundtrack: OFF';
+    e.classList.remove('on');
+  }
+});
+
+document.querySelector('#ribbit').addEventListener('click', () => {
+  const ribbit = getRibbit();
+  status.textContent = `RIBBIT // ${ribbit.scanStatus} // NOT ABSTRACTED`;
+  assetStatus.textContent = ribbit.description;
+  window.dispatchEvent(new CustomEvent('tadc-ribbit-selected', { detail: ribbit }));
+});
 
 tabs.forEach(tab => tab.addEventListener('click', async () => {
   const mode = tab.dataset.mode;
