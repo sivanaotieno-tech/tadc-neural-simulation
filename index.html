@@ -3,63 +3,70 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="TADC-inspired WebXR neural simulation game with an MRI-derived human brain, Bubble fruit-fly brain, soundtrack system, and Ribbit.">
+  <meta name="description" content="TADC-inspired fictional neural circus VR game.">
   <title>Neural Circus VR</title>
   <link rel="stylesheet" href="src/styles.css">
 </head>
 <body>
   <header class="hud">
     <div>
-      <div class="eyebrow">NEURAL CIRCUS // WEBXR</div>
+      <div class="eyebrow">NEURAL CIRCUS // VR GAME</div>
       <h1>Neural Circus VR</h1>
-      <p>Enter the neural lab, inspect the MRI brain, switch to Bubble, or meet Ribbit.</p>
+      <p id="subtitle">Enter the lab. Create your fictional circus character. Explore.</p>
     </div>
-    <div class="status" id="status">INITIALISING VR</div>
+    <div class="status" id="status">SYSTEM READY</div>
   </header>
 
   <main class="layout">
     <section class="viewer-card">
-      <canvas id="brainCanvas" aria-label="WebXR neural laboratory"></canvas>
+      <canvas id="brainCanvas" aria-label="Interactive fictional neural circus world"></canvas>
       <div class="viewer-overlay">
-        <span id="assetStatus">Preparing VR lab…</span>
-        <span>Desktop: mouse + wheel · Headset: VR button + controllers</span>
+        <span id="assetStatus">Preparing neural lab…</span>
+        <span>Desktop: drag + wheel · VR: controllers</span>
       </div>
     </section>
 
     <aside class="panel">
       <div class="tabs">
-        <button class="tab active" data-mode="human">Human MRI</button>
-        <button class="tab" data-mode="bubble">Bubble</button>
+        <button class="tab active" data-mode="human" type="button">Player</button>
+        <button class="tab" data-mode="bubble" type="button">Bubble</button>
       </div>
-      <div id="humanPanel">
-        <h2>Neural Lab</h2>
-        <p>Explore the MRI-derived brain in an immersive WebXR scene.</p>
-        <dl>
-          <div><dt>VR</dt><dd>WebXR enabled</dd></div>
-          <div><dt>Source</dt><dd>bma-1-mri.nii.gz</dd></div>
-          <div><dt>Grid</dt><dd>678 × 1000 × 210</dd></div>
-          <div><dt>Voxel</dt><dd>≈ 0.04 × 0.04 × 0.112 mm</dd></div>
-        </dl>
-      </div>
-      <div id="bubblePanel" hidden>
-        <h2>Bubble's Neural Lab</h2>
-        <p>Switch to the supplied fruit-fly brain scan and inspect it in the same VR room.</p>
-        <p class="note">The supplied image is a scan/reference visualization, not a neuron-by-neuron connectome.</p>
-      </div>
+
+      <section id="humanPanel">
+        <h2 id="playerTitle">No character yet</h2>
+        <p id="playerDescription">Your fictional neural-circus character is created by the in-game scan sequence.</p>
+        <div class="scan-box">
+          <div class="scan-ring" aria-hidden="true"></div>
+          <div>
+            <strong id="scanStatus">SCAN READY</strong>
+            <span id="scanDetail">No persistent character exists yet.</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="bubblePanel" hidden>
+        <h2>Bubble</h2>
+        <p>Inspect the fictional fruit-fly character mode. The supplied 2D scan/reference cannot establish a real connectome.</p>
+      </section>
+
       <div class="controls">
-        <button id="pulse" class="control on">Neural pulses: ON</button>
-        <button id="rotate" class="control">Auto-rotate: OFF</button>
-        <button id="reset" class="control">Reset view</button>
-        <button id="music" class="control">Soundtrack: OFF</button>
-        <button id="ribbit" class="control">Meet Ribbit</button>
+        <button id="enterGame" class="control primary" type="button">ENTER THE DIGITAL CIRCUS</button>
+        <button id="scan" class="control" type="button">Run fictional brain scan</button>
+        <button id="abstract" class="control danger" type="button" disabled>Abstract player</button>
+        <button id="pulse" class="control on" type="button">Neural pulses: ON</button>
+        <button id="rotate" class="control" type="button">Auto-rotate: OFF</button>
+        <button id="reset" class="control" type="button">Reset view</button>
+        <button id="music" class="control" type="button">Soundtrack: OFF</button>
+        <button id="ribbit" class="control" type="button">Meet Ribbit</button>
       </div>
-      <div class="vr-help">🥽 <b>VR:</b> press <b>ENTER THE DIGITAL CIRCUS</b>. The fictional neural scan creates a persistent player character and remains active until in-game abstraction.</div>
+
+      <div class="vr-help"><b>GAME LOOP:</b> enter → fictional scan → persistent character → explore Player/Bubble → abstract only when you choose it.</div>
       <div class="vr-help"><b>RIBBIT:</b> ACTIVE · PERMANENT · NOT ABSTRACTED</div>
-      <div class="vr-help"><b>SOUNDTRACK:</b> add authorized soundtrack recordings to <code>assets/audio/</code>.</div>
+      <div class="vr-help"><b>IMPORTANT:</b> this is a fictional game mechanic, not real brain-reading or a medical scan.</div>
     </aside>
   </main>
 
-  <footer>Experimental fan project · WebXR build · Fictional neural scan · No real brain-reading · Requires a WebXR-compatible browser/headset for immersive mode.</footer>
+  <footer>Experimental fan game · Fictional neural scan · WebXR · Your browser save persists the character until abstraction/reset.</footer>
   <script type="module" src="src/app.js"></script>
 </body>
 </html>
