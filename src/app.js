@@ -44,10 +44,13 @@ function enterGame() {
 
 $('#enterGame').addEventListener('click', async () => {
   enterGame();
-  if (soundtrack.audio?.paused) {
-    await soundtrack.play('main');
+  const result = await soundtrack.play('main');
+  if (result.playing) {
     $('#music').textContent = 'Soundtrack: ON';
     $('#music').classList.add('on');
+  } else {
+    status.textContent = 'SPOTIFY PLAYLIST OPENED';
+    assetStatus.textContent = 'Add authorized local audio to assets/audio/ for in-game playback.';
   }
 });
 
@@ -92,13 +95,20 @@ $('#reset').addEventListener('click', () => viewer.reset());
 
 $('#music').addEventListener('click', async e => {
   if (soundtrack.audio?.paused) {
-    await soundtrack.play('main');
-    e.textContent = 'Soundtrack: ON';
-    e.classList.add('on');
+    const result = await soundtrack.play('main');
+    if (result.playing) {
+      e.textContent = 'Soundtrack: ON';
+      e.classList.add('on');
+      status.textContent = 'SOUNDTRACK PLAYING';
+    } else {
+      status.textContent = 'SPOTIFY PLAYLIST OPENED';
+      assetStatus.textContent = 'Local audio is not installed; Spotify playlist opened instead.';
+    }
   } else {
     soundtrack.stop();
     e.textContent = 'Soundtrack: OFF';
     e.classList.remove('on');
+    status.textContent = 'SOUNDTRACK OFF';
   }
 });
 
